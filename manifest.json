@@ -13,7 +13,12 @@
       ]
     }
   ],
+
+  "icons": {
+    "16": "binar16.png",
+    "48" : "binar48.png"},
+
   "browser_action": {
-    "default_icon": "butImNotta.png"
+    "default_icon": "binar16.png"
   }
 }
