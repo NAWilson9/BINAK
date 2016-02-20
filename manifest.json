@@ -1,0 +1,5 @@
+{
+  "name": "ButImNotAKeyboard",
+  "description": "This extension captures html gamepad inputs and emulates a keyboard in order to use a gamepad with any web game.",
+  "version": "0.0.0"
+}
