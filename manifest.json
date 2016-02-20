@@ -12,5 +12,8 @@
         "emulator.js"
       ]
     }
-  ]
+  ],
+  "icons": {
+    "16": "binar16.png",
+    "48" : "binar48.png"}
 }
