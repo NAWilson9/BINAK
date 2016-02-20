@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+</head>
+<script>
+    function Button(name, buttonReference){
+        return {
+            'name': name,
+            'reference': buttonReference
+        };
+    }
+    var template = {
+        'Special Buttons': [
+            Button('Start'),
+            Button('Select')
+        ],
+        'Triggers': [
+            Button('Left Bumper'),
+            Button('Left Trigger'),
+            Button('Right Bumper'),
+            Button('Right Trigger')
+        ],
+        'DPad': [
+                Button('Left'),
+                Button('Right'),
+                Button('Up'),
+                Button('Down')
+        ]
+    };
+
+    const buttonDefault = 'Remap',
+            buttonToggle = 'Press a button';
+
+
+    function registerKeyCode(buttonReference, code){
+        // TODO
+    }
+
+    var last;
+    function buttonHandler(self, category, name){
+        if(self.innerHTML == buttonDefault) {
+            if(last){
+                last.innerHTML = buttonDefault;
+            }
+            last = self;
+            self.innerHTML=buttonToggle;
+
+            window.onkeydown = function (e) {
+                var code = e.keyCode;
+                console.log(String.fromCharCode(code));
+                template[category].forEach(function (button) {
+                    if (button.name == name) {
+                        registerKeyCode(button.reference, code);
+                    }
+                });
+                self.innerHTML = buttonDefault;
+                window.onkeydown = function () {
+                };
+            }
+        }
+        else{
+            self.innerHTML = buttonDefault;
+            window.onkeydown = function(){};
+        }
+    }
+
+    window.onload = function(){
+        var out = "";
+        for(var category in template){
+            if(template.hasOwnProperty(category)){
+                out += "<h2>"+category+"</h2>";
+                var buttonArray = template[category];
+                buttonArray.forEach(function(button){
+                    out += "<div class='label'>" + button.name + "</div><button onclick='buttonHandler(this, \""+category+"\",\""+button.name+"\");'>"+buttonDefault+"</button><br/>";
+                });
+            }
+        }
+        document.getElementById('content').innerHTML = out;
+    };
+</script>
+<style>
+    .label{
+        width:200px;
+        display:inline-block;
+    }
+</style>
+<body>
+
+<div id="content"></div>
+
+</body>
+</html>
